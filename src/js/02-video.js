@@ -11,7 +11,6 @@ player.on('timeupdate', throttle(saveCurrentTime, 1000));
 
 function saveCurrentTime({ duration, seconds }) {
   localStorage.setItem(CURRENT_TIME, seconds);
-  console.log('fffgd');
   if (seconds === duration) localStorage.removeItem(CURRENT_TIME);
 }
 
