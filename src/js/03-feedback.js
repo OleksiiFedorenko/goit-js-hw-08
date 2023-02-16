@@ -20,10 +20,15 @@ function saveData(evt) {
 function onSubmit(evt) {
   evt.preventDefault();
 
-  console.log(currentData);
+  if (!currentData.email || !currentData.message) {
+    alert('Please fill in all the fields');
+  } else {
+    console.log(currentData);
 
-  evt.currentTarget.reset();
-  localStorage.removeItem(FORM_DATA);
+    currentData = {};
+    evt.currentTarget.reset();
+    localStorage.removeItem(FORM_DATA);
+  }
 }
 
 function addSavedData() {
@@ -31,7 +36,7 @@ function addSavedData() {
 
   if (formData) {
     currentData = JSON.parse(formData);
-    formRef.email.value = currentData.email;
-    formRef.message.value = currentData.message;
+    if (currentData.email) formRef.email.value = currentData.email;
+    if (currentData.message) formRef.message.value = currentData.message;
   }
 }

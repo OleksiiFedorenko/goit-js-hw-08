@@ -5,11 +5,20 @@ const iframeRef = document.querySelector('iframe');
 const player = new Player(iframeRef);
 const CURRENT_TIME = 'videoplayer-current-time';
 
-player.setCurrentTime(localStorage.getItem(CURRENT_TIME));
+putCurrentTime();
 
 player.on('timeupdate', throttle(saveCurrentTime, 1000));
 
 function saveCurrentTime({ duration, seconds }) {
   localStorage.setItem(CURRENT_TIME, seconds);
+  console.log('fffgd');
   if (seconds === duration) localStorage.removeItem(CURRENT_TIME);
+}
+
+function putCurrentTime() {
+  player.setCurrentTime(
+    localStorage.getItem(CURRENT_TIME)
+      ? localStorage.getItem(CURRENT_TIME)
+      : 0.0
+  );
 }
